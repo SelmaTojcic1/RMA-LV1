@@ -6,7 +6,7 @@ class Dice {
     private var diceValues = IntArray(6)
 
     init {
-        for (i in 1..6) {
+        for (i in 1..5) {
             dice.add(Die())
         }
     }
@@ -29,11 +29,11 @@ class Dice {
 
     fun checkDiceValues() {
         dice.forEachIndexed() {
-                index, dice -> println("${index+1}. number: ${dice.value} " ) }
+                index, dice -> println("${index+1}. die: ${dice.value} " ) }
     }
 
-    fun getDiceValues() : IntArray {
-        for(i in 0..5) {
+    private fun getDiceValues() : IntArray {
+        for(i in 0..4) {
             diceValues[i] = dice[i].value
         }
         return diceValues
@@ -43,9 +43,6 @@ class Dice {
         when {
             checkStraight() -> {
                 println("You have Straight!")
-            }
-            checkPoker() && checkFull() -> {
-                println("You have Poker and Full House!")
             }
             checkPoker() -> {
                 println("You have Poker!")
@@ -62,14 +59,11 @@ class Dice {
     private fun checkStraight() : Boolean {
         diceValues = getDiceValues()
         diceValues.sortDescending()
+        val index = 0
 
-        for(index in 0..1) {
-            if (diceValues[index] == diceValues[index+1]+1 && diceValues[index] == diceValues[index+2]+2 &&
-                diceValues[index] == diceValues[index+3]+3 && diceValues[index] == diceValues[index+4]+4) {
-                if(diceValues[index] == 6 || diceValues[index] == 5) {
-                    return true
-                }
-            }
+        if (diceValues[index] == diceValues[index+1]+1 && diceValues[index] == diceValues[index+2]+2 &&
+            diceValues[index] == diceValues[index+3]+3 && diceValues[index] == diceValues[index+4]+4) {
+                return true
         }
         return false
     }
@@ -82,11 +76,13 @@ class Dice {
         var threesNumber = 0
         var twosExist = false
 
-        for(index in 0..3) {
+        for(index in 0..2 step 2) {
             if(diceValues[index] == diceValues[index+1] && diceValues[index] == diceValues[index+2]) {
                 threesExist = true
                 threesNumber = diceValues[index]
             }
+        }
+        for(index in 0..3 step 3) {
             if(diceValues[index] == diceValues[index+1] && diceValues[index] != threesNumber) {
                 twosExist = true
             }
@@ -96,11 +92,11 @@ class Dice {
         return false
     }
 
-    fun checkPoker() : Boolean {
+    private fun checkPoker() : Boolean {
         diceValues = getDiceValues()
         diceValues.sortDescending()
 
-        for(index in 0..2) {
+        for(index in 0..1) {
             if (diceValues[index] == diceValues[index+1] && diceValues[index] == diceValues[index+2] &&
                 diceValues[index] == diceValues[index+3]) {
                 return true
