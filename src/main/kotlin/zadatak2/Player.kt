@@ -4,7 +4,7 @@ open class Player {
     private val hand = Deck()
     var sum: Int = 0
 
-    fun getCard() : Card {
+    private fun getCard() : Card {
         return hand.deck.random()
     }
 
@@ -22,5 +22,8 @@ open class Player {
         val playersCard = getCard()
         playersCard.checkCard()
         sum += playersCard.rankToValue()
+        if(sum > 21 && playersCard.rank == Rank.ACE) {
+            sum -= 10
+        }
     }
 }

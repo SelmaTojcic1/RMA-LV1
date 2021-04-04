@@ -16,9 +16,9 @@ data class Card (
             Rank.EIGHT -> 8
             Rank.NINE -> 9
             Rank.TEN -> 10
-            Rank.JACK -> 11
-            Rank.QUEEN -> 11
-            Rank.KING -> 11
+            Rank.JACK -> 10
+            Rank.QUEEN -> 10
+            Rank.KING -> 10
             Rank.ACE -> 11
         }
     }

@@ -15,7 +15,7 @@ fun main() {
             println("Your sum is " + player.sum + "\n")
             if (player.sum > 21) {
                 println("You lost..")
-                continue
+                input = 0
             }
         }
 
@@ -25,9 +25,12 @@ fun main() {
             dealer.hit()
             if (dealer.sum > 21 || player.sum > dealer.sum) {
                 println("You won!")
+                input = 0
             }
-            else
+            else {
                 println("You lost..")
+                input = 0
+            }
         }
     } while(input != 0)
 
